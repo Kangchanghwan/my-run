@@ -11,11 +11,13 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D playerRigidbody2D;
     private Animator animator;
+    private AudioSource playerAudio;
 
     void Awake()
     {
         playerRigidbody2D = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        playerAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,7 +33,7 @@ public class PlayerController : MonoBehaviour
             jumpCounter++;
             playerRigidbody2D.linearVelocity = Vector2.zero;
             playerRigidbody2D.AddForce(Vector2.up * jumpForce);
-            //TODO:: AUDIO 재생 추가
+            playerAudio.PlayOneShot(GameManager.instance.jumpClip);
         }
         else if (Input.GetMouseButtonUp(0) && playerRigidbody2D.linearVelocity.y > 0)
         {
@@ -69,8 +71,9 @@ public class PlayerController : MonoBehaviour
     {
         animator.SetTrigger("Die");
         
-        // 오디오 재생
         playerRigidbody2D.linearVelocity = Vector2.zero;
         isDead = true;
+        GameManager.instance.onPlayerDead();
+        playerAudio.PlayOneShot(GameManager.instance.dropDeathClip);
     }
 }
