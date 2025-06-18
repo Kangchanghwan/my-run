@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PlatformSpawner : MonoBehaviour
 {
@@ -21,8 +23,8 @@ public class PlatformSpawner : MonoBehaviour
     
     private Vector2 poolPosition = new Vector2(0, 25);
     private float lastSpawnTime;
-    
-    
+
+
     void Start()
     {
         platforms = new GameObject[count];

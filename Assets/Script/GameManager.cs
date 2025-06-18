@@ -12,6 +12,7 @@ public class GameManager : MonoBehaviour
     public AudioClip jumpClip;
     public AudioClip dropDeathClip;
     public AudioClip spikeDeathClip;
+    public AudioClip getCoinClip;
     
     public static GameManager instance;
     

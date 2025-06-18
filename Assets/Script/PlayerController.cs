@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -27,8 +28,10 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
+        // UI 요소 위에서 클릭했는지 확인
+        bool isClickingUI = EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
 
-        if (Input.GetMouseButtonDown(0) && jumpCounter < 2)
+        if (Input.GetMouseButtonDown(0) && !isClickingUI && jumpCounter < 2)
         {
             jumpCounter++;
             playerRigidbody2D.linearVelocity = Vector2.zero;
